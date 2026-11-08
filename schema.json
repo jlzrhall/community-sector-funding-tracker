@@ -1,39 +1,33 @@
 {
-  "version": "1.0.0",
-  "scope": "Financial Wellbeing and Financial Capability programs only",
+  "version": "2.0.0",
+  "scope": "Financial Wellbeing and Financial Capability programs",
   "files": {
-    "programs.csv": {
-      "key": "program_id + fy",
+    "funding.csv": {
+      "key": "program_id + year",
       "columns": {
-        "program_id": "string, unique per program-year row",
+        "program_id": "string, stable id",
         "program_name": "string",
-        "provider": "string",
-        "state": "string, AU state/territory code",
-        "fy": "string, e.g. 2024-25",
-        "program_type": "enum: Financial Wellbeing | Financial Capability",
-        "staff_level": "string, must match schads_rates.classification",
-        "fte_funded": "number > 0, FTE the funding is intended to support",
-        "total_funding": "number, AUD, equals sum of funding_lines for the row"
+        "year": "string, financial year e.g. 2024-25",
+        "baseline_funding": "number, AUD. Recurrent base funding for the year, before that year's indexation, supplementation and one-off amounts",
+        "indexation_funding": "number, AUD, >= 0. Added in the year through indexation",
+        "supplementation_funding": "number, AUD, >= 0. Added in the year through supplementation",
+        "one_off_funding": "number, AUD, >= 0. Non-recurrent funding for the year",
+        "note": "string, optional. Shown in the funding event register"
       }
     },
-    "funding_lines.csv": {
-      "key": "program_id + fy + category",
+    "schads_index.csv": {
+      "key": "year",
       "columns": {
-        "program_id": "string, FK to programs.csv",
-        "fy": "string",
-        "category": "enum: Salaries | On-costs | Operating | Admin and overheads | Client costs",
-        "amount": "number, AUD"
-      }
-    },
-    "schads_rates.csv": {
-      "key": "classification + fy",
-      "columns": {
-        "classification": "string",
-        "fy": "string",
-        "annual_salary_ft": "number, AUD, full-time annual base salary",
-        "oncost_rate": "number 0-1, super, leave, workers comp etc. as fraction of salary",
-        "notes": "string, source or caveat"
+        "year": "string, must cover every year in funding.csv",
+        "schads_increase_pct": "number, percent increase applied from the previous year. First year is 0",
+        "note": "string, source or caveat"
       }
     }
+  },
+  "derived": {
+    "actual_funding": "baseline + indexation + supplementation (+ one_off if selected)",
+    "schads_indexed_funding": "first-year baseline compounded by schads_increase_pct each year",
+    "annual_gap": "schads_indexed_funding - actual_funding (positive = shortfall)",
+    "cumulative_gap": "running sum of annual_gap"
   }
 }

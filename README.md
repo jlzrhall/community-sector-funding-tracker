@@ -1,38 +1,40 @@
-# Community Sector Funding Tracker
+# Community Sector Funding Tracker (Version 2)
 
-A static dashboard comparing community sector program funding with SCHADS-based labour costs.
-**Version 1 covers Financial Wellbeing and Financial Capability programs only.**
-All data is placeholder sample data.
+A static policy analysis dashboard showing how program funding has changed over time and how it compares with SCHADS-indexed funding. Version 2 covers Financial Wellbeing and Financial Capability programs. All data is placeholder.
+
+## Questions answered
+1. How has baseline funding changed over time?
+2. How much funding came through indexation?
+3. How much came through supplementation?
+4. What would funding be if indexed to SCHADS?
+5. What is the annual funding gap?
+6. What is the cumulative funding gap?
 
 ## Pages
-Overview, Funding vs SCHADS, Funding Composition, Methodology.
+Overview, Funding History, Funding Composition, Funding vs SCHADS, Event Register, Methodology.
 
 ## Structure
 ```
-index.html        page shell and navigation
-css/styles.css    styles
-js/app.js         data loading, calculations, charts
-data/             CSVs and schema.json
-methodology.md    rendered in the Methodology page
+index.html         page shell
+css/styles.css     styles
+js/app.js          loading, calculations, charts
+data/funding.csv   Program, Year, Baseline, Indexation, Supplementation, One-Off
+data/schads_index.csv  annual SCHADS percentage increases
+data/schema.json   data schema
+methodology.md     rendered in the Methodology page
 ```
 
 ## Run locally
-Browsers block `fetch` on `file://`, so serve the folder:
 ```
 python3 -m http.server 8000
 ```
-Open http://localhost:8000
+Open http://localhost:8000 (browsers block data loading from file://).
 
-## Deploy on GitHub Pages
-1. Push this folder to a GitHub repository.
-2. Settings > Pages > Source: deploy from branch `main`, folder `/ (root)`.
-3. Visit `https://<user>.github.io/<repo>/`.
+## Deploy to GitHub Pages
+Push to GitHub, then Settings > Pages > deploy from `main`, folder `/ (root)`.
 
 ## Update data
-Edit the CSVs in `data/` following `data/schema.json`, commit and push. The dashboard shows a warning if funding lines do not sum to total funding.
+Edit the CSVs following `data/schema.json`. Every year in `funding.csv` needs a row in `schads_index.csv`. The dashboard shows warnings for missing years or negative values.
 
 ## Dependencies
-Chart.js 4.4.1 loaded from the jsDelivr CDN.
-
-## Roadmap
-Multi-year trends, state filters, inflation adjustment, mixed-classification staffing, CSV validation in CI.
+Chart.js 4.4.1 via jsDelivr CDN.

@@ -1,32 +1,38 @@
 # Methodology
 
-**Status:** Version 1 draft. All data in this repository is placeholder sample data.
+**Status:** Version 2 draft. All data is placeholder sample data.
 
-## Scope
-Version 1 covers Financial Wellbeing and Financial Capability programs only.
+## Purpose
+This tool analyses how funding for community sector programs has moved over time and compares it with what funding would have been if it had kept pace with SCHADS wage increases. Version 2 covers Financial Wellbeing and Financial Capability programs.
 
-## Data sources
-- `data/programs.csv`: program-level funding, FTE and staff classification.
-- `data/funding_lines.csv`: funding split by cost category.
-- `data/schads_rates.csv`: SCHADS benchmark salaries and on-cost rates.
+## Data model
+Each record is one program in one year, with four funding components:
+- **Baseline funding:** recurrent base funding for the year, before that year's additions.
+- **Indexation funding:** amount added in the year through indexation.
+- **Supplementation funding:** amount added in the year through supplementation.
+- **One-off funding:** non-recurrent amounts for the year.
 
 ## Calculations
-- **Funded labour cost per FTE** = (Salaries + On-costs) / FTE funded.
-- **SCHADS benchmark per FTE** = annual full-time salary x (1 + on-cost rate), for the program's classification and financial year.
-- **Coverage %** = funded labour cost per FTE / SCHADS benchmark per FTE.
-- **Gap per FTE** = benchmark - funded labour cost per FTE. Positive means underfunded against the benchmark.
-- **Funding composition** = each category as a share of total funding.
+- **Total funding** = baseline + indexation + supplementation + one-off.
+- **Actual funding (for comparison)** = baseline + indexation + supplementation. One-off funding is excluded by default because it is not recurrent. A control on the dashboard includes it.
+- **SCHADS-indexed funding:** the program's first-year baseline, increased each following year by the SCHADS percentage increase for that year.
+- **Annual funding gap** = SCHADS-indexed funding - actual funding. Positive values are a shortfall; negative values mean funding is ahead of SCHADS.
+- **Cumulative funding gap** = sum of annual gaps from the first year to each year.
+- **Baseline change** = baseline this year - baseline last year.
+
+## Funding event register
+Built from the data. Each non-zero indexation, supplementation and one-off amount is an event, and each year-on-year baseline change is recorded as a baseline adjustment.
 
 ## Assumptions and limitations
-- Each program is benchmarked against a single classification; real teams mix levels.
-- On-cost rate is a flat assumption.
-- Benchmark covers labour only, not operating or overhead costs.
-- Funding is compared by financial year without inflation adjustment.
-- Sample SCHADS rates are illustrative and must be replaced with published Fair Work rates.
+- The SCHADS-indexed line starts from the first year's baseline and assumes funding was adequate in that year.
+- A single SCHADS percentage applies to all programs in a year.
+- Figures are nominal and not adjusted for inflation or demand.
+- The comparison is whole-of-funding, not tied to staffing levels or classifications.
+- The SCHADS percentages in this repository are placeholders and must be verified before use.
 
-## Data quality checks
-- Funding lines must sum to `total_funding` (the dashboard flags mismatches).
-- Every `staff_level` must exist in `schads_rates.csv` for that year.
+## Data checks
+- Every year in funding.csv must have a row in schads_index.csv.
+- All funding components must be zero or greater.
 
 ## Change log
-- v1.0.0: Initial MVP.
+- v2.0.0: Rebuilt as a policy analysis tool. Removed FTE and labour-cost benchmarking.
