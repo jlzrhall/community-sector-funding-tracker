@@ -1,0 +1,39 @@
+{
+  "version": "1.0.0",
+  "scope": "Financial Wellbeing and Financial Capability programs only",
+  "files": {
+    "programs.csv": {
+      "key": "program_id + fy",
+      "columns": {
+        "program_id": "string, unique per program-year row",
+        "program_name": "string",
+        "provider": "string",
+        "state": "string, AU state/territory code",
+        "fy": "string, e.g. 2024-25",
+        "program_type": "enum: Financial Wellbeing | Financial Capability",
+        "staff_level": "string, must match schads_rates.classification",
+        "fte_funded": "number > 0, FTE the funding is intended to support",
+        "total_funding": "number, AUD, equals sum of funding_lines for the row"
+      }
+    },
+    "funding_lines.csv": {
+      "key": "program_id + fy + category",
+      "columns": {
+        "program_id": "string, FK to programs.csv",
+        "fy": "string",
+        "category": "enum: Salaries | On-costs | Operating | Admin and overheads | Client costs",
+        "amount": "number, AUD"
+      }
+    },
+    "schads_rates.csv": {
+      "key": "classification + fy",
+      "columns": {
+        "classification": "string",
+        "fy": "string",
+        "annual_salary_ft": "number, AUD, full-time annual base salary",
+        "oncost_rate": "number 0-1, super, leave, workers comp etc. as fraction of salary",
+        "notes": "string, source or caveat"
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+program_id,fy,category,amount
+P001,2024-25,Salaries,330000
+P001,2024-25,On-costs,40000
+P001,2024-25,Operating,60000
+P001,2024-25,Admin and overheads,65000
+P001,2024-25,Client costs,25000
+P002,2024-25,Salaries,175000
+P002,2024-25,On-costs,22000
+P002,2024-25,Operating,35000
+P002,2024-25,Admin and overheads,38000
+P002,2024-25,Client costs,15000
+P003,2024-25,Salaries,225000
+P003,2024-25,On-costs,28000
+P003,2024-25,Operating,40000
+P003,2024-25,Admin and overheads,47000
+P003,2024-25,Client costs,25000
+P004,2024-25,Salaries,130000
+P004,2024-25,On-costs,16000
+P004,2024-25,Operating,28000
+P004,2024-25,Admin and overheads,28000
+P004,2024-25,Client costs,13000
+P005,2023-24,Salaries,315000
+P005,2023-24,On-costs,38000
+P005,2023-24,Operating,58000
+P005,2023-24,Admin and overheads,62000
+P005,2023-24,Client costs,22000
+P006,2023-24,Salaries,212000
+P006,2023-24,On-costs,26000
+P006,2023-24,Operating,38000
+P006,2023-24,Admin and overheads,45000
+P006,2023-24,Client costs,24000

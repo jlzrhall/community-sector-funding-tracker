@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Community Sector Funding Tracker</title>
+<link rel="stylesheet" href="css/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Community Sector Funding Tracker</h1>
+    <p>Financial Wellbeing and Capability programs. Sample data only.</p>
+  </div>
+  <nav aria-label="Pages">
+    <a href="#overview" data-page="overview">Overview</a>
+    <a href="#schads" data-page="schads">Funding vs SCHADS</a>
+    <a href="#composition" data-page="composition">Funding Composition</a>
+    <a href="#methodology" data-page="methodology">Methodology</a>
+  </nav>
+</header>
+<main>
+  <div class="controls">
+    <label for="fy">Financial year</label>
+    <select id="fy"></select>
+  </div>
+  <div id="warnings"></div>
+
+  <section id="overview" class="page">
+    <h2>Overview</h2>
+    <div class="stats" id="stats"></div>
+    <div class="chart-box"><canvas id="chartOverview"></canvas></div>
+    <div class="table-wrap"><table id="tblOverview"></table></div>
+  </section>
+
+  <section id="schads" class="page">
+    <h2>Funding vs SCHADS</h2>
+    <p class="note">Funded labour cost per FTE compared with the SCHADS benchmark including on-costs.</p>
+    <div class="chart-box"><canvas id="chartSchads"></canvas></div>
+    <div class="table-wrap"><table id="tblSchads"></table></div>
+  </section>
+
+  <section id="composition" class="page">
+    <h2>Funding Composition</h2>
+    <p class="note">Share of each program's funding by cost category.</p>
+    <div class="chart-box"><canvas id="chartComp"></canvas></div>
+  </section>
+
+  <section id="methodology" class="page">
+    <h2>Methodology</h2>
+    <article id="mdBody">Loading...</article>
+  </section>
+</main>
+<footer>Placeholder data. Not for decision-making. Version 1.0.0</footer>
+<script src="js/app.js"></script>
+</body>
+</html>
